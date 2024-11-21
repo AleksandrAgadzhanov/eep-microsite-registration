@@ -86,7 +86,7 @@ def run():
 
             # Collect data (handle optional file uploads)
             data = {
-                "userid": userid,
+                "psid": userid,
                 "name": name,
                 "last_name": last_name,
                 "email": email,

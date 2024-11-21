@@ -9,7 +9,7 @@ def run():
     reviews = fetch_reviews_from_mongodb("reviews")
 
     # Filter applications with status "submitted"
-    submitted_applications = [app for app in applications if app["status"] == "submitted"]
+    submitted_applications = [app for app in applications if app["status"] == "Submitted"]
 
     # Display list of submitted applications
     for app in submitted_applications:
@@ -20,12 +20,12 @@ def run():
                 reviewer = st.text_input("Reviewer", value=review['reviewer'], key=f"reviewer_{app['psid']}")
                 comments = st.text_area("Comments", value=review['comments'], key=f"comments_{app['psid']}")
                 rating = st.selectbox("Rating", [1, 2, 3, 4, 5], index=review['rating'] - 1, key=f"rating_{app['psid']}")
-                status = st.selectbox("Status", ["under review", "approved", "rejected"], index=["under review", "approved", "rejected"].index(review['status']), key=f"status_{app['psid']}")
+                status = st.selectbox("Status", ["Under Review", "Approved", "Rejected"], index=["Under Review", "Approved", "Rejected"].index(review['status']), key=f"status_{app['psid']}")
             else:
                 reviewer = st.text_input("Reviewer", key=f"reviewer_{app['psid']}")
                 comments = st.text_area("Comments", key=f"comments_{app['psid']}")
                 rating = st.selectbox("Rating", [1, 2, 3, 4, 5], key=f"rating_{app['psid']}")
-                status = st.selectbox("Status", ["under review", "approved", "rejected"], key=f"status_{app['psid']}")
+                status = st.selectbox("Status", ["Under Review", "Approved", "Rejected"], key=f"status_{app['psid']}")
 
             if st.button("Save Review", key=f"save_{app['psid']}"):
                 update_review_in_mongodb(app["psid"], reviewer, comments, rating, status)

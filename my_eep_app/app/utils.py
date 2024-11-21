@@ -52,7 +52,7 @@ def fetch_from_mongodb_by_id(collection_name, user_id):
 def fetch_reviews_from_mongodb(collection_name="reviews"):
     # Establish a connection to the MongoDB server
     client = MongoClient("mongodb://localhost:27017/")  # Update with your MongoDB connection string if needed
-    db = client["your_database_name"]  # Replace with your database name
+    db = client["application_db"]  # Replace with your database name
     collection = db[collection_name]
 
     # Fetch all reviews from the collection
@@ -68,7 +68,7 @@ from pymongo import MongoClient
 def update_review_in_mongodb(psid, reviewer, comments, rating, status, collection_name="reviews"):
     # Establish a connection to the MongoDB server
     client = MongoClient("mongodb://localhost:27017/")  # Update with your MongoDB connection string if needed
-    db = client["your_database_name"]  # Replace with your database name
+    db = client["application_db"]  # Replace with your database name
     collection = db[collection_name]
 
     # Update the review in the collection
