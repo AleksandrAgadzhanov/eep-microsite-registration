@@ -106,12 +106,11 @@ def display_home():
             st.markdown(
                 """
                 <div class="sub-section">
-                    <p>The programme accelerates your technical career path, develops leadership capabilities, 
-                    and fosters collaboration to deliver significant business and technical strategies.</p>
+                    <p>Enterprise Engineer Programme is a flagship technical talent programme and part of the Dynamic, Rewarding Career initiative of the People Pillar of Vision '27 to cultivate an enterprise mindset and develop engineers' current and future technical skills required to achieve Vision '27</p>
                     <ul>
-                        <li>Enhance technical leadership skills.</li>
-                        <li>Build a community of technical experts.</li>
-                        <li>Collaborate to add value.</li>
+                        <li>To accelerate your technical career path and to get the best out of our technical talent.</li>
+                        <li>To build technical leadership capabilities necessary to deliver on our most significant business and technical strategies and challenges.</li>
+                        <li>To grow our community of technical experts who collaborate to add value.</li>
                     </ul>
                 </div>
                 """,
@@ -136,7 +135,7 @@ def display_home():
                         <li>Blockchain</li>
                     </ul>
                     <p>
-                        High-Performance Behaviors training includes 12 competencies that enhance high-performance skills.
+                        High Performance Behaviors training includes 12 competencies that help enhance the high-performance skills and enterprise mindset. This training is done by our vendor partner and leading training provider, "Davies - Group".
                     </p>
                 </div>
                 """,
@@ -152,8 +151,7 @@ def display_home():
                 <div class="sub-section">
                     <h3>Business Assignment Project</h3>
                     <p>
-                        Work in teams to complete a real business assignment project over four months. 
-                        Get sign-off from business sponsors to ensure project success.
+                        Participants will work in teams to complete a real business assignment project over 4 months of the programme and get sign-off from business sponsors.
                     </p>
                     <h3>Industry Certification</h3>
                     <p>
@@ -189,11 +187,13 @@ def display_home():
                 """
                 <div class="sub-section">
                     <p>
-                        The cost per candidate is around USD 9105. Costs are proportionately re-charged 
-                        to the participant's GB/GFs by the COO team.
+                        The cost of the programme per candidate is around USD 9105. The programme costs are proportionately
+                        re-charged to the participant's GB/GFs by the COO team.
                     </p>
                     <p>
-                        If a participant leaves early or does not join, their cost center absorbs the programme cost.
+                        If for any reason, any participant leaves the programme before completion or does not join after
+                        seat confirmation and a replacement cannot be identified, the entire programme cost will be
+                        absorbed by the participant's cost center.
                     </p>
                 </div>
                 """,
