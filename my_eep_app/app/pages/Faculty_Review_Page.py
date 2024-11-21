@@ -25,7 +25,7 @@ def run():
             # Unique key for each selectbox and button
             new_status = st.selectbox(
                 "Change Status", 
-                ["Under Review", "Approved", "Rejected"], 
+                ["Draft","Under Review", "Approved", "Rejected"], 
                 index=["Under Review", "Approved", "Rejected"].index(app["status"]), 
                 key=f"status_{app['_id']}"  # Unique key based on application ID
             )
