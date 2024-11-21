@@ -34,3 +34,7 @@ def fetch_from_mongodb(collection_name):
 def update_application_status(application_id, new_status):
     db = get_mongo_client()
     db["applications"].update_one({"_id": application_id}, {"$set": {"status": new_status}})
+
+def fetch_from_mongodb_by_id(collection_name, user_id):
+    db = get_mongo_client()
+    return list(db[collection_name].find({"userid": user_id}))
