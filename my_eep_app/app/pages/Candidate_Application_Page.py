@@ -2,6 +2,7 @@ import streamlit as st
 from app.utils import upload_to_mongodb, fetch_from_mongodb_by_id
 import logging
 
+
 def run():
     st.title("Candidate Application Form")
     with st.form("application_form"):
@@ -64,6 +65,10 @@ def run():
             logging.info(f"Which Cohort: {which_cohort}")
             logging.info(f"Resume: {resume}")
             logging.info(f"Certificate: {certificate}")
+
+
+        # Submit button
+        if st.form_submit_button("Submit"):
 
             # Collect data (handle optional file uploads)
             data = {

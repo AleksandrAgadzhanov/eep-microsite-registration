@@ -6,6 +6,7 @@ if not test_mongo_connection():
 else:
     st.success("MongoDB connection verified!")
 
+
 def main():
     st.sidebar.title("Navigation")
     page = st.sidebar.selectbox("Go to", ["Applicant", "Faculty", "Admin"])
@@ -19,6 +20,7 @@ def main():
     elif page == "Admin":
         from app.pages import Admin_Page
         Admin_Page.run()
+
 
 if __name__ == "__main__":
     main()
