@@ -44,7 +44,7 @@ for _ in range(50):
         "which_cohort": random.sample(["Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"], 1),
         "resume": None,  # Assuming no file for simplicity
         "certificate": None,  # Assuming no file for simplicity
-        "status": random_status(["draft", "submitted", "withdrawn"])
+        "status": random_status(["Draft", "Submitted", "Withdrawn"])
     })
 
 # Insert candidate applications into MongoDB
@@ -58,7 +58,7 @@ for _ in range(25):
         "reviewer": f"Dr. Reviewer{_+1}",
         "comments": "This is a review comment.",
         "rating": random.randint(1, 5),
-        "status": random_status(["under review", "approved", "rejected"])
+        "status": random_status(["Under Review", "Approved", "Rejected"])
     })
 
 # Insert faculty reviews into MongoDB
