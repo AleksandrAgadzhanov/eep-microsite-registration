@@ -1,10 +1,10 @@
 import streamlit as st
 from app.utils import test_mongo_connection
 
-#if not test_mongo_connection():
-#    st.error("Failed to connect to MongoDB. Please check the database connection and restart the app.")
-#else:
-#    st.success("MongoDB connection verified!")
+if not test_mongo_connection():
+    st.error("Failed to connect to MongoDB. Please check the database connection and restart the app.")
+else:
+    st.success("MongoDB connection verified!")
 
 def main():
     st.sidebar.title("Navigation")
