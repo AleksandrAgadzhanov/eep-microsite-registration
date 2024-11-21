@@ -1,8 +1,13 @@
 import streamlit as st
 from app.utils import upload_to_mongodb, fetch_from_mongodb_by_id
 import logging
+from app.utils import update_application_status
 
-
+def update_status(app_id):
+    new_status = st.session_state[f"status_{app_id}"]
+    update_application_status(app_id, new_status)
+    st.success("Status updated successfully!")
+    
 def run():
     st.title("Candidate Application Form")
     with st.form("application_form"):
@@ -21,6 +26,18 @@ def run():
                     if isinstance(app, dict):
                         with st.expander(f"{app['name']} ({app['email']})"):
                             st.write(f"Status: {app['status']}")
+                            
+                            # Allow user to update status
+                            new_status = st.selectbox(
+                                "Change Status", 
+                                ["Draft","Submitted", "Withdrawn"], 
+                                index=["Draft","Submitted", "Withdrawn"].index(app["status"]), 
+                                key=f"status_{app['_id']}")
+                            
+                            update_button = st.form_submit_button("Update Status")
+                            if update_button:
+                                for app in applications:
+                                    update_status(app["_id"])
 
                             # Download buttons for files
                             if app.get("resume"):
@@ -36,6 +53,7 @@ def run():
                         st.error("Invalid application data format.")
 
         # TODO: Additional input fields for submission
+        # status = st.selectbox("Status", ["Draft", "Submitted", "Withdrawn"])
         name = st.text_input("First Name")
         last_name = st.text_input("Last Name")
         email = st.text_input("Email Address")
@@ -66,10 +84,6 @@ def run():
             logging.info(f"Resume: {resume}")
             logging.info(f"Certificate: {certificate}")
 
-
-        # Submit button
-        if st.form_submit_button("Submit"):
-
             # Collect data (handle optional file uploads)
             data = {
                 "userid": userid,
@@ -85,8 +99,10 @@ def run():
                 "which_cohort": which_cohort,
                 "resume": resume.getvalue() if resume else None,  # Optional
                 "certificate": certificate.getvalue() if certificate else None,  # Optional
-                "status": "Under Review" # draft, submitted, withdrawn
+                "status": "Draft"
             }
+            
+            # data["status"] = status
 
             # Upload data to MongoDB
             upload_to_mongodb(data, "applications")
