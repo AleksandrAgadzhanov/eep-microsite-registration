@@ -3,6 +3,8 @@
 
 eepmicrovenv/
 eepmicrovenv
+.idea/
+.idea
 ### direnv ###
 .direnv
 .envrc
