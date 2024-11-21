@@ -225,10 +225,12 @@ def display_home():
                     """
                     <div class="sub-section">
                         <p>
-                            - Permanent employees of HSBC Technology across all GB/GFs globally <br>
-                            - Active employees only (i.e. those who are not serving probation, notice period, performance 
-                              improvement plan or on sabbatical/long sick leave <br>
-                            - Completed at least 2 annual performance reviews
+                            <ul>
+                                <li> Permanent employees of HSBC Technology across all GB/GFs globally </li> 
+                                <li> Active employees only (i.e. those who are not serving probation, notice period, performance 
+                                     improvement plan or on sabbatical/long sick leave </li> 
+                                <li> Completed at least 2 annual performance reviews </li>
+                            </ul>
                         </p>
                     </div>
                     """,
@@ -240,10 +242,12 @@ def display_home():
                     """
                     <div class="sub-section">
                         <p>
-                            - GCB 5-6 <br>
-                            - GCB 4 (promoted to GC 4 from within the last 2 years) <br>
-                            - Performing in a purely technical role (e.g. developer/code, tester, product support,
-                              application and infrastructure support, etc.)
+                            <ul>
+                                <li> GCB 5-6 </li>
+                                <li> GCB 4 (promoted to GC 4 from within the last 2 years) </li>
+                                <li> Performing in a purely technical role (e.g. developer/code, tester, product support,
+                                  application and infrastructure support, etc.) </li>
+                            </ul>
                         </p>
                     </div>
                     """,
@@ -255,9 +259,11 @@ def display_home():
                     """
                     <div class="sub-section">
                         <p>
-                            - Take on new challenges in the current role <br>
-                            - Explore technologies outside of the current work <br>
-                            - Continue learning at all stages of the career development
+                            <ul>
+                                <li> Take on new challenges in the current role </li>
+                                <li> Explore technologies outside of the current work </li>
+                                <li> Continue learning at all stages of the career development </li>
+                            </ul>
                         </p>
                     </div>
                     """,
@@ -269,7 +275,9 @@ def display_home():
                     """
                     <div class="sub-section">
                         <p>
-                            - Please register for on of the sessions on Meetup to know more about the EEP self-nomination process
+                            <ul>
+                                <li> Please register for on of the sessions on Meetup to know more about the EEP self-nomination process </li>
+                            </ul>
                         </p>
                     </div>
                     """,
