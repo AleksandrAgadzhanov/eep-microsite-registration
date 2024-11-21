@@ -82,7 +82,7 @@ def main():
 # Home Page Content with Tabs
 def display_home():
     # Navigation Tabs
-    tabs = st.tabs(["Home", "Overview", "Structure", "Certification", "Management", "Cost", "Faculties"])
+    tabs = st.tabs(["Home", "Overview", "Structure", "Certification", "Management", "Cost", "Faculties", "Target Audience"])
 
     # Tab: Home
     with tabs[0]:
@@ -215,6 +215,75 @@ def display_home():
                 """,
                 unsafe_allow_html=True,
             )
+
+        # Tab: Target Audience
+        with tabs[7]:
+            with st.container():
+                logo_and_title("images/target_audience.jpg","Target Audience")
+                st.subheader("Eligibility")
+                st.markdown(
+                    """
+                    <div class="sub-section">
+                        <p>
+                            <ul>
+                                <li> Permanent employees of HSBC Technology across all GB/GFs globally </li> 
+                                <li> Active employees only (i.e. those who are not serving probation, notice period, performance 
+                                     improvement plan or on sabbatical/long sick leave </li> 
+                                <li> Completed at least 2 annual performance reviews </li>
+                            </ul>
+                        </p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+                st.divider()
+                st.subheader("Role Specification")
+                st.markdown(
+                    """
+                    <div class="sub-section">
+                        <p>
+                            <ul>
+                                <li> GCB 5-6 </li>
+                                <li> GCB 4 (promoted to GC 4 from within the last 2 years) </li>
+                                <li> Performing in a purely technical role (e.g. developer/code, tester, product support,
+                                  application and infrastructure support, etc.) </li>
+                            </ul>
+                        </p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+                st.divider()
+                st.subheader("Aspirations")
+                st.markdown(
+                    """
+                    <div class="sub-section">
+                        <p>
+                            <ul>
+                                <li> Take on new challenges in the current role </li>
+                                <li> Explore technologies outside of the current work </li>
+                                <li> Continue learning at all stages of the career development </li>
+                            </ul>
+                        </p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+                st.divider()
+                st.subheader("Meetup (Webinars)")
+                st.markdown(
+                    """
+                    <div class="sub-section">
+                        <p>
+                            <ul>
+                                <li> Please register for on of the sessions on Meetup to know more about the EEP self-nomination process </li>
+                            </ul>
+                        </p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+                st.divider()
 
 if __name__ == "__main__":
     main()
