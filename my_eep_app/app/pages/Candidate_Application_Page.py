@@ -1,12 +1,25 @@
 import streamlit as st
+import os
 from app.utils import fetch_from_mongodb_by_id, update_application, create_new_application
+
+def save_uploaded_file(uploaded_file, folder="uploads"):
+    if uploaded_file is not None:
+        # Create the uploads folder if it doesn't exist
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        # Save the file to the specified folder
+        file_path = os.path.join(folder, uploaded_file.name)
+        with open(file_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        return file_path
+    return None
 
 def run():
     st.title("Candidate Application Form")
     with st.form("application_form"):
         # Input fields
         userid = st.text_input("Please enter your PSID")
-        #load_button = st.form_submit_button("Load Application")
+    #load_button = st.form_submit_button("Load Application")
 
     #if load_button:
         # Retrieve list of applications based on user id
@@ -25,12 +38,14 @@ def run():
             personal_statement = st.text_area("Personal Statement", value=app.get("personal_statement", ""))
             technologies = st.multiselect("Technologies", ["Python", "Java", "C++", "C#", "JavaScript", "SQL", "NoSQL", "HTML", "CSS", "Other"], default=app.get("technologies", []))
             which_cohort = st.selectbox("Which Cohort", ["Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"], index=["Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"].index(app.get("which_cohort", ["Cohort 1"])[0]))
-            resume = st.file_uploader("Upload Resume",type=["pdf", "docx"])
-            certificate = st.file_uploader("Upload Certificate",type=["pdf", "docx"])
+            resume = st.file_uploader("Upload Resume", type=["pdf", "docx"])
+            certificate = st.file_uploader("Upload Certificate", type=["pdf", "docx"])
             status = st.selectbox("Status", ["Draft", "Submitted", "Withdrawn"], index=["Draft", "Submitted", "Withdrawn"].index(app.get("status", "Draft")))
 
             update_button = st.form_submit_button("Update Application")
             if update_button:
+                resume_path = save_uploaded_file(resume)
+                certificate_path = save_uploaded_file(certificate)
                 updated_application = {
                     "psid": userid,
                     "name": name,
@@ -43,8 +58,8 @@ def run():
                     "personal_statement": personal_statement,
                     "technologies": technologies,
                     "which_cohort": [which_cohort],
-                    "resume": resume,
-                    "certificate": certificate,
+                    "resume": resume_path,
+                    "certificate": certificate_path,
                     "status": status
                 }
                 update_application(app["_id"], updated_application)
@@ -62,12 +77,14 @@ def run():
             personal_statement = st.text_area("Personal Statement")
             technologies = st.multiselect("Technologies", ["Python", "Java", "C++", "C#", "JavaScript", "SQL", "NoSQL", "HTML", "CSS", "Other"])
             which_cohort = st.selectbox("Which Cohort", ["Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"])
-            resume = st.file_uploader("Upload Resume",type=["pdf", "docx"])
-            certificate = st.file_uploader("Upload Certificate",type=["pdf", "docx"])
+            resume = st.file_uploader("Upload Resume", type=["pdf", "docx"])
+            certificate = st.file_uploader("Upload Certificate", type=["pdf", "docx"])
             status = st.selectbox("Status", ["Draft", "Submitted", "Withdrawn"])
 
             create_button = st.form_submit_button("Create Application")
             if create_button:
+                resume_path = save_uploaded_file(resume)
+                certificate_path = save_uploaded_file(certificate)
                 new_application = {
                     "psid": userid,
                     "name": name,
@@ -80,8 +97,8 @@ def run():
                     "personal_statement": personal_statement,
                     "technologies": technologies,
                     "which_cohort": [which_cohort],
-                    "resume": resume,
-                    "certificate": certificate,
+                    "resume": resume_path,
+                    "certificate": certificate_path,
                     "status": status
                 }
                 create_new_application(new_application)
