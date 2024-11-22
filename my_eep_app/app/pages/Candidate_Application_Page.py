@@ -25,8 +25,8 @@ def run():
             personal_statement = st.text_area("Personal Statement", value=app.get("personal_statement", ""))
             technologies = st.multiselect("Technologies", ["Python", "Java", "C++", "C#", "JavaScript", "SQL", "NoSQL", "HTML", "CSS", "Other"], default=app.get("technologies", []))
             which_cohort = st.selectbox("Which Cohort", ["Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"], index=["Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"].index(app.get("which_cohort", ["Cohort 1"])[0]))
-            resume = st.file_uploader("Upload Resume")
-            certificate = st.file_uploader("Upload Certificate")
+            resume = st.file_uploader("Upload Resume",type=["pdf", "docx"])
+            certificate = st.file_uploader("Upload Certificate",type=["pdf", "docx"])
             status = st.selectbox("Status", ["Draft", "Submitted", "Withdrawn"], index=["Draft", "Submitted", "Withdrawn"].index(app.get("status", "Draft")))
 
             update_button = st.form_submit_button("Update Application")
@@ -62,8 +62,8 @@ def run():
             personal_statement = st.text_area("Personal Statement")
             technologies = st.multiselect("Technologies", ["Python", "Java", "C++", "C#", "JavaScript", "SQL", "NoSQL", "HTML", "CSS", "Other"])
             which_cohort = st.selectbox("Which Cohort", ["Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"])
-            resume = st.file_uploader("Upload Resume")
-            certificate = st.file_uploader("Upload Certificate")
+            resume = st.file_uploader("Upload Resume",type=["pdf", "docx"])
+            certificate = st.file_uploader("Upload Certificate",type=["pdf", "docx"])
             status = st.selectbox("Status", ["Draft", "Submitted", "Withdrawn"])
 
             create_button = st.form_submit_button("Create Application")
