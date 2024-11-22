@@ -24,7 +24,7 @@ def run():
             individual_or_manager = st.selectbox("Individual or Manager", ["Individual", "Manager"], index=["Individual", "Manager"].index(app.get("individual_or_manager", "Individual")))
             personal_statement = st.text_area("Personal Statement", value=app.get("personal_statement", ""))
             technologies = st.multiselect("Technologies", ["Python", "Java", "C++", "C#", "JavaScript", "SQL", "NoSQL", "HTML", "CSS", "Other"], default=app.get("technologies", []))
-            technologies_other = st.text_area("Other Technologies", value=app.get("technologies_other", ""))
+            # technologies_other = st.text_area("Other Technologies", value=app.get("technologies_other", ""))
             which_cohort = st.selectbox("Which Cohort", ["Cohort 5 (the best, of course)","Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"], index=["Cohort 5 (the best, of course)","Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"].index(app.get("which_cohort", ["Not Entered"])[0]))
             resume = st.file_uploader("Upload Resume", type=["pdf", "docx"])
             certificate = st.file_uploader("Upload Certificate", type=["pdf", "docx"])
@@ -45,7 +45,7 @@ def run():
                     "individual_or_manager": individual_or_manager,
                     "personal_statement": personal_statement,
                     "technologies": technologies,
-                    "technologies_other": technologies_other,
+                    # "technologies_other": technologies_other,
                     "which_cohort": [which_cohort],
                     "resume": Binary(resume_data) if resume_data else None,
                     "certificate": Binary(certificate_data) if certificate_data else None,
@@ -69,7 +69,7 @@ def run():
             individual_or_manager = st.selectbox("Individual or Manager", ["Not Selected","Individual", "Manager"])
             personal_statement = st.text_area("Personal Statement", max_chars=8192)
             technologies = st.multiselect("Technologies", ["Python", "Java", "C++", "C#", "JavaScript", "SQL", "NoSQL", "HTML", "CSS", "Other"], help="Select all that apply")
-            technologies_other = st.text_area("Other Technologies", help="Please specify other technologies not listed above", max_chars=8192)
+            # technologies_other = st.text_area("Other Technologies", help="Please specify other technologies not listed above", max_chars=8192)
             which_cohort = st.selectbox("Which Cohort", ["Not Entered","Cohort 5 (the best, of course)","Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4"])
             resume = st.file_uploader("Upload Resume", type=["pdf", "docx"], help="Please upload your resume in PDF or DOCX format")
             certificate = st.file_uploader("Upload Certificate", type=["pdf", "docx"], help="Please upload any certifications in PDF or DOCX format")
@@ -90,7 +90,7 @@ def run():
                     "individual_or_manager": individual_or_manager,
                     "personal_statement": personal_statement,
                     "technologies": technologies,
-                    "technologies_other": technologies_other.split("\n") if technologies_other else "",
+                    # "technologies_other": technologies_other.split("\n") if technologies_other else "",
                     "which_cohort": [which_cohort],
                     "resume": Binary(resume_data) if resume_data else None,
                     "certificate": Binary(certificate_data) if certificate_data else None,
