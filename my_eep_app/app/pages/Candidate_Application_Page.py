@@ -1,27 +1,13 @@
 import streamlit as st
-import os
+from bson import Binary
 from app.utils import fetch_from_mongodb_by_id, update_application, create_new_application
-
-def save_uploaded_file(uploaded_file, folder="uploads"):
-    if uploaded_file is not None:
-        # Create the uploads folder if it doesn't exist
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-        # Save the file to the specified folder
-        file_path = os.path.join(folder, uploaded_file.name)
-        with open(file_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
-        return file_path
-    return None
 
 def run():
     st.title("Candidate Application Form")
     with st.form("application_form"):
         # Input fields
         userid = st.text_input("Please enter your PSID")
-    #load_button = st.form_submit_button("Load Application")
 
-    #if load_button:
         # Retrieve list of applications based on user id
         applications = fetch_from_mongodb_by_id("applications", userid)
 
@@ -44,8 +30,8 @@ def run():
 
             update_button = st.form_submit_button("Update Application")
             if update_button:
-                resume_path = save_uploaded_file(resume)
-                certificate_path = save_uploaded_file(certificate)
+                resume_data = resume.read() if resume is not None else app.get("resume")
+                certificate_data = certificate.read() if certificate is not None else app.get("certificate")
                 updated_application = {
                     "psid": userid,
                     "name": name,
@@ -58,8 +44,8 @@ def run():
                     "personal_statement": personal_statement,
                     "technologies": technologies,
                     "which_cohort": [which_cohort],
-                    "resume": resume_path,
-                    "certificate": certificate_path,
+                    "resume": Binary(resume_data) if resume_data else None,
+                    "certificate": Binary(certificate_data) if certificate_data else None,
                     "status": status
                 }
                 update_application(app["_id"], updated_application)
@@ -83,8 +69,8 @@ def run():
 
             create_button = st.form_submit_button("Create Application")
             if create_button:
-                resume_path = save_uploaded_file(resume)
-                certificate_path = save_uploaded_file(certificate)
+                resume_data = resume.read() if resume is not None else None
+                certificate_data = certificate.read() if certificate is not None else None
                 new_application = {
                     "psid": userid,
                     "name": name,
@@ -97,8 +83,8 @@ def run():
                     "personal_statement": personal_statement,
                     "technologies": technologies,
                     "which_cohort": [which_cohort],
-                    "resume": resume_path,
-                    "certificate": certificate_path,
+                    "resume": Binary(resume_data) if resume_data else None,
+                    "certificate": Binary(certificate_data) if certificate_data else None,
                     "status": status
                 }
                 create_new_application(new_application)
