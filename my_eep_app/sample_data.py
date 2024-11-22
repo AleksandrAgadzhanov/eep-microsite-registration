@@ -32,7 +32,7 @@ candidate_applications = []
 for _ in range(50):
     candidate_applications.append({
         "psid": generate_psid(),
-        "name": f"Candidate {_+1}",
+        "name": f"Candidate{_+1}",
         "last_name": f"LastName{_+1}",
         "email": f"candidate{_+1}@example.com",
         "gender": random.choice(["Male", "Female", "Other"]),
