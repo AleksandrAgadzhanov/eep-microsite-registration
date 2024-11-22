@@ -2,6 +2,8 @@ import streamlit as st
 import pymongo
 import os
 from PIL import Image
+from streamlit import sidebar
+
 from app.utils import test_mongo_connection  # Import test_mongo_connection
 
 # Global CSS for styling
@@ -42,18 +44,6 @@ def logo_and_title(logo_path, title):
     except FileNotFoundError:
         st.warning(f"Image for {title} not found.")
 
-# MongoDB Configuration
-mongo_uri = os.getenv('MONGO_URI')
-client = pymongo.MongoClient(mongo_uri)
-db = client.mydatabase
-collection = db.programs
-
-# Verify MongoDB connection
-if not test_mongo_connection():
-    st.error("Failed to connect to MongoDB. Please check the database connection and restart the app.")
-else:
-    st.success("MongoDB connection verified!")
-
 # Initialize Session States
 if 'login_page' not in st.session_state:
     st.session_state.login_page = False
@@ -65,7 +55,8 @@ if 'is_staff' not in st.session_state:
 # Sidebar Navigation
 def main():
     st.sidebar.title("Navigation")
-    page = st.sidebar.selectbox("Go to", ["Home", "Applicant", "Faculty", "Admin"])
+
+    page = st.sidebar.selectbox("Go to",["Home", "Applicant", "Faculty", "Admin"])
 
     if page == "Home":
         display_home()
@@ -79,6 +70,19 @@ def main():
         from app.pages import Admin_Page
         Admin_Page.run()
 
+    # MongoDB Configuration
+    mongo_uri = os.getenv('MONGO_URI')
+    client = pymongo.MongoClient(mongo_uri)
+    db = client.mydatabase
+    collection = db.programs
+
+    # Verify MongoDB connection
+    st.sidebar.write("### MongoDB Connection Status")
+    if not test_mongo_connection():
+        st.sidebar.error("Failed to connect to MongoDB. Please check the database connection and restart the app.")
+    else:
+        st.sidebar.success("MongoDB connection verified!")
+
 # Home Page Content with Tabs
 def display_home():
     # Navigation Tabs
@@ -91,7 +95,7 @@ def display_home():
             <div class="sub-section">
                 <h2 class="section-title">Welcome to the Enterprise Engineer Programme</h2>
                 <p>
-                    This is a flagship technical talent programme designed to cultivate an enterprise mindset and 
+                    This is a flagship technical talent programme designed to cultivate an enterprise mindset and
                     develop engineers' technical and leadership skills required to achieve Vision '27.
                 </p>
             </div>
@@ -155,7 +159,7 @@ def display_home():
                     </p>
                     <h3>Industry Certification</h3>
                     <p>
-                        Participants are required to complete one recommended industry certification to become a 
+                        Participants are required to complete one recommended industry certification to become a
                         "Certified Enterprise Engineer."
                     </p>
                 </div>
@@ -208,7 +212,7 @@ def display_home():
                 """
                 <div class="sub-section">
                     <p>
-                        Details about the programme faculties will be listed here. This includes profiles of 
+                        Details about the programme faculties will be listed here. This includes profiles of
                         subject matter experts and their specializations.
                     </p>
                 </div>
@@ -226,9 +230,9 @@ def display_home():
                     <div class="sub-section">
                         <p>
                             <ul>
-                                <li> Permanent employees of HSBC Technology across all GB/GFs globally </li> 
-                                <li> Active employees only (i.e. those who are not serving probation, notice period, performance 
-                                     improvement plan or on sabbatical/long sick leave </li> 
+                                <li> Permanent employees of HSBC Technology across all GB/GFs globally </li>
+                                <li> Active employees only (i.e. those who are not serving probation, notice period, performance
+                                     improvement plan or on sabbatical/long sick leave </li>
                                 <li> Completed at least 2 annual performance reviews </li>
                             </ul>
                         </p>

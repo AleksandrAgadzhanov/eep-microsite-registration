@@ -35,16 +35,49 @@ def fetch_from_mongodb(collection_name):
     db = get_mongo_client()
     return list(db[collection_name].find())
 
-
-def update_application_status(application_id, new_status):
+def update_application(application_id, updated_application):
     db = get_mongo_client()
-    db["applications"].update_one({"_id": application_id}, {"$set": {"status": new_status}})
-    
-def update_status(app_id):
-    new_status = st.session_state[f"status_{app_id}"]
-    update_application_status(app_id, new_status)
-    st.success("Status updated successfully!")
+    db["applications"].update_one({"_id": application_id}, {"$set": updated_application})
     
 def fetch_from_mongodb_by_id(collection_name, user_id):
     db = get_mongo_client()
-    return list(db[collection_name].find({"userid": user_id}))
+    return list(db[collection_name].find({"psid": user_id}))
+
+def fetch_reviews_from_mongodb(collection_name="reviews"):
+    # Establish a connection to the MongoDB server
+    client = MongoClient("mongodb://localhost:27017/")  # Update with your MongoDB connection string if needed
+    db = client["application_db"]  # Replace with your database name
+    collection = db[collection_name]
+
+    # Fetch all reviews from the collection
+    reviews = list(collection.find({}))
+
+    # Close the connection
+    client.close()
+
+    return reviews
+
+def create_new_application(application_data):
+    db = get_mongo_client()
+    db["applications"].insert_one(application_data)
+
+def update_review_in_mongodb(psid, reviewer, comments, rating, status, collection_name="reviews"):
+    # Establish a connection to the MongoDB server
+    client = MongoClient("mongodb://localhost:27017/")  # Update with your MongoDB connection string if needed
+    db = client["application_db"]  # Replace with your database name
+    collection = db[collection_name]
+
+    # Update the review in the collection
+    collection.update_one(
+        {"psid": psid},
+        {"$set": {
+            "reviewer": reviewer,
+            "comments": comments,
+            "rating": rating,
+            "status": status
+        }},
+        upsert=True  # Create the document if it doesn't exist
+    )
+
+    # Close the connection
+    client.close()
