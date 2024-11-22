@@ -29,7 +29,7 @@ clean_collections()
 
 # Sample data for candidate applications
 candidate_applications = []
-for _ in range(50):
+for _ in range(10):
     candidate_applications.append({
         "psid": generate_psid(),
         "name": f"Candidate {_+1}",
@@ -52,7 +52,7 @@ applications_collection.insert_many(candidate_applications)
 
 # Sample data for faculty reviews
 faculty_reviews = []
-for _ in range(25):
+for _ in range(7):
     faculty_reviews.append({
         "psid": random.choice(candidate_applications)["psid"],
         "reviewer": f"Dr. Reviewer{_+1}",
