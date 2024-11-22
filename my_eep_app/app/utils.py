@@ -35,19 +35,13 @@ def fetch_from_mongodb(collection_name):
     db = get_mongo_client()
     return list(db[collection_name].find())
 
-
-def update_application_status(application_id, new_status):
+def update_application(application_id, updated_application):
     db = get_mongo_client()
-    db["applications"].update_one({"_id": application_id}, {"$set": {"status": new_status}})
-    
-def update_status(app_id):
-    new_status = st.session_state[f"status_{app_id}"]
-    update_application_status(app_id, new_status)
-    st.success("Status updated successfully!")
+    db["applications"].update_one({"_id": application_id}, {"$set": updated_application})
     
 def fetch_from_mongodb_by_id(collection_name, user_id):
     db = get_mongo_client()
-    return list(db[collection_name].find({"userid": user_id}))
+    return list(db[collection_name].find({"psid": user_id}))
 
 def fetch_reviews_from_mongodb(collection_name="reviews"):
     # Establish a connection to the MongoDB server
@@ -63,7 +57,9 @@ def fetch_reviews_from_mongodb(collection_name="reviews"):
 
     return reviews
 
-from pymongo import MongoClient
+def create_new_application(application_data):
+    db = get_mongo_client()
+    db["applications"].insert_one(application_data)
 
 def update_review_in_mongodb(psid, reviewer, comments, rating, status, collection_name="reviews"):
     # Establish a connection to the MongoDB server
