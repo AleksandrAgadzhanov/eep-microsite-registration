@@ -42,6 +42,7 @@ def run():
             st.write(f"Individual or Manager: {app['individual_or_manager']}")
             st.write(f"Personal Statement: {app['personal_statement']}")
             st.write(f"Technologies: {', '.join(app['technologies'])}")
+            st.write(f"Other Technologies: {app['technologies_other']}")
             st.write(f"Which Cohort: {', '.join(app['which_cohort'])}")
             st.write(f"Status: {app['status']}")
             if app["resume"]:
