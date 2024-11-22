@@ -81,6 +81,8 @@ def main():
 
 # Home Page Content with Tabs
 def display_home():
+    # Add a header image
+    st.image("images/header.png", use_container_width=True)  # Replace with your header image path
     # Navigation Tabs
     tabs = st.tabs(["Home", "Overview", "Structure", "Certification", "Management", "Cost", "Faculties", "Target Audience"])
 
