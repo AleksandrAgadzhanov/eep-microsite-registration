@@ -35,15 +35,9 @@ def fetch_from_mongodb(collection_name):
     db = get_mongo_client()
     return list(db[collection_name].find())
 
-
-def update_application_status(application_id, new_status):
+def update_application(application_id, updated_application):
     db = get_mongo_client()
-    db["applications"].update_one({"_id": application_id}, {"$set": {"status": new_status}})
-    
-def update_status(app_id):
-    new_status = st.session_state[f"status_{app_id}"]
-    update_application_status(app_id, new_status)
-    st.success("Status updated successfully!")
+    db["applications"].update_one({"_id": application_id}, {"$set": updated_application})
     
 def fetch_from_mongodb_by_id(collection_name, user_id):
     db = get_mongo_client()
